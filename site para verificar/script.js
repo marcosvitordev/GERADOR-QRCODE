@@ -1,3 +1,5 @@
+const codeReader = new ZXing.BrowserQRCodeReader();
+
 // Função para verificar código de identificação
 function verificarCodigo() {
     const codigo = document.getElementById("codigoInput").value;
@@ -15,40 +17,34 @@ function verificarCodigo() {
 }
 
 // Função para iniciar a câmera e ler QR Code
-function startCamera() {
-    const html5QrCode = new Html5Qrcode("reader");
-    const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-        // Aqui você pode parar a câmera após a leitura bem-sucedida
-        html5QrCode.stop().then((ignore) => {
-            // Parou com sucesso
-            console.log("Câmera parada");
-        }).catch((err) => {
-            console.error("Erro ao parar a câmera:", err);
-        });
+async function startCamera() {
+    const video = document.getElementById('video');
 
-        // Processar o texto decodificado
-        const dados = JSON.parse(decodedText);
-        mostrarResultado(dados);
-    };
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+        video.srcObject = stream;
+        video.setAttribute("playsinline", true); // para iOS
+        video.play();
 
-    const qrCodeErrorCallback = (errorMessage) => {
-        // Você pode ignorar ou lidar com erros de leitura
-        console.log("Erro ao ler QR Code: ", errorMessage);
-    };
-
-    // Começar a captura da câmera
-    html5QrCode.start(
-        { facingMode: "environment" }, // Usar a câmera traseira
-        {
-            fps: 10,
-            qrbox: { width: 250, height: 250 } // Tamanho da caixa de leitura
-        },
-        qrCodeSuccessCallback,
-        qrCodeErrorCallback
-    ).catch(err => {
-        console.error("Erro ao iniciar a câmera:", err);
-    });
+        // Iniciar leitura contínua
+        setInterval(async () => {
+            try {
+                const result = await codeReader.decodeFromVideoDevice(undefined, video);
+                const dados = JSON.parse(result.text);
+                mostrarResultado(dados);
+            } catch (err) {
+                // Ignorar erros de leitura
+            }
+        }, 1000); // Tenta ler a cada segundo
+    } catch (err) {
+        console.error("Erro ao acessar a câmera:", err);
+    }
 }
+
+// Iniciar a câmera automaticamente ao carregar a página
+window.onload = () => {
+    startCamera();
+};
 
 // Função para mostrar resultado na tela
 function mostrarResultado(aluno) {
