@@ -3,19 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificação de QR Code</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxing-js/0.18.6/zxing-js.min.js"></script>
+    <title>Leitor de QR Code</title>
+    <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
+    <style>
+        #qr-reader {
+            width: 300px;
+            margin: auto;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Verificação de QR Code</h1>
-        <div>
-            <h2>Escaneie QR Code</h2>
-            <video id="video" width="300" height="300" style="border: 1px solid black;"></video>
-        </div>
-        <div id="resultado"></div>
-    </div>
-    <script src="script.js"></script>
+
+    <h1>Verificador de QR Code</h1>
+    <div id="qr-reader"></div>
+    <div id="qr-result">Resultado: Nenhum QR Code lido</div>
+
+    <script>
+        function onScanSuccess(decodedText, decodedResult) {
+            // Sucesso ao ler o QR Code, exibe os dados do JSON
+            console.log(`Código QR detectado: ${decodedText}`);
+            document.getElementById("qr-result").innerHTML = `Resultado: ${decodedText}`;
+
+            // Aqui assumimos que o QR Code contém um link para um JSON ou string JSON
+            try {
+                let jsonData = JSON.parse(decodedText); // Se for um JSON embutido
+                // Exibindo os dados do JSON
+                document.getElementById("qr-result").innerHTML += `<pre>${JSON.stringify(jsonData, null, 2)}</pre>`;
+            } catch (e) {
+                console.error("Erro ao processar o JSON:", e);
+            }
+        }
+
+        function onScanFailure(error) {
+            // Caso falhe na leitura do QR Code, apenas loga o erro
+            console.warn(`Erro ao ler o código: ${error}`);
+        }
+
+        // Inicializando o scanner de QR Code
+        let html5QrCode = new Html5Qrcode("qr-reader");
+        html5QrCode.start(
+            { facingMode: "environment" },  // Usando a câmera traseira
+            {
+                fps: 10,    // Taxa de quadros
+                qrbox: { width: 250, height: 250 }  // Tamanho da caixa de detecção
+            },
+            onScanSuccess,
+            onScanFailure
+        ).catch(err => {
+            console.error("Erro ao iniciar a câmera:", err);
+        });
+    </script>
+
 </body>
 </html>
