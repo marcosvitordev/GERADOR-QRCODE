@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificação de Aluno</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Verificação de Aluno</h1>
+        <div>
+            <h2>Por Código de Identificação</h2>
+            <input type="text" id="codigoInput" placeholder="Digite o código">
+            <button onclick="verificarCodigo()">Verificar</button>
+        </div>
+        <div>
+            <h2>Ou Escanear QR Code</h2>
+            <div id="reader" style="width: 300px; height: 300px;"></div>
+            <button onclick="startCamera()">Iniciar Câmera</button>
+        </div>
+        <div id="resultado"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
