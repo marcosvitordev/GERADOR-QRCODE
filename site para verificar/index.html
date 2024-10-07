@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leitor de QR Code</title>
+    <title>Leitor de QR Code e Verificador de Alunos</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Leitor de QR Code</h1>
+    <h1>Leitor de QR Code - Verificar Aluno</h1>
     <div id="videoContainer">
         <video id="video" width="300" height="300" autoplay></video>
         <canvas id="canvas" hidden></canvas>
     </div>
-    <p id="output">QR Code: <span id="qrcodeData"></span></p>
+    <p id="output">Aluno: <span id="nomeAluno"></span></p>
+    <p id="professor">Professor: <span id="professorAluno"></span></p>
+    <p id="dataInicio">Data de Início: <span id="dataInicioAluno"></span></p>
+    <p id="dataFim">Data de Fim: <span id="dataFimAluno"></span></p>
+    <p id="errorMessage"></p>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
     <script src="script.js"></script>
