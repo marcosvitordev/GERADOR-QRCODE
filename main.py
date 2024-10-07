@@ -7,7 +7,7 @@ import os
 from tkcalendar import DateEntry
 
 # Nome do arquivo JSON para armazenar todos os alunos
-ARQUIVO_JSON = 'site para verificar/alunos.json'
+ARQUIVO_JSON = 'alunos.json'
 
 # Função para carregar dados existentes do JSON
 def carregar_dados():
