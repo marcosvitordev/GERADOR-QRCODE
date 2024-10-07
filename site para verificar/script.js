@@ -14,7 +14,7 @@ $(document).ready(function() {
             });
     }
 
-    // Função para escanear QR Code
+    // Função para escanear QR Cod
     function scanQRCode() {
         if (video.readyState === video.HAVE_ENOUGH_DATA) {
             canvas.width = video.videoWidth;
