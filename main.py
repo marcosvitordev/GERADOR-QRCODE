@@ -4,6 +4,7 @@ import qrcode
 import json
 import uuid  # Para gerar códigos de identificação únicos
 import os
+from tkcalendar import DateEntry
 
 # Nome do arquivo JSON para armazenar todos os alunos
 ARQUIVO_JSON = 'site para verificar/alunos.json'
@@ -34,9 +35,9 @@ def gerar_qr_code():
     codigo_identificacao = str(uuid.uuid4())
 
     # Dados predefinidos
-    escola = "ESCOLA: Centro de Estudo Sena - CES"
-    professor = "PROFESSOR: MARCOS VITOR LIMA DA COSTA"
-    coordenador = "COORDENADOR: JOAQUIM DE ARAÚJO MORAIS"
+    escola = "Centro de Estudo Sena - CES"
+    professor = "MARCOS VITOR LIMA DA COSTA"
+    coordenador = "JOAQUIM DE ARAÚJO MORAIS"
 
     # Texto do QR Code
     dados_aluno = {
@@ -70,22 +71,25 @@ def gerar_qr_code():
 # Configuração da janela principal
 root = tk.Tk()
 root.title("Gerador de QR Code")
-
+root.geometry('400x400')
 # Criando os rótulos e entradas
 tk.Label(root, text="Nome do Aluno:").grid(row=0, column=0, padx=10, pady=10)
 entry_nome = tk.Entry(root)
 entry_nome.grid(row=0, column=1, padx=10, pady=10)
 
+# Campo para a data de início do curso
 tk.Label(root, text="Data Início do Curso:").grid(row=1, column=0, padx=10, pady=10)
-entry_data_inicio = tk.Entry(root)
+entry_data_inicio = DateEntry(root, width=12, background='darkblue', foreground='white', borderwidth=2)
 entry_data_inicio.grid(row=1, column=1, padx=10, pady=10)
 
+# Campo para a data de fim do curso
 tk.Label(root, text="Data Fim do Curso:").grid(row=2, column=0, padx=10, pady=10)
-entry_data_fim = tk.Entry(root)
+entry_data_fim = DateEntry(root, width=12, background='darkblue', foreground='white', borderwidth=2)
 entry_data_fim.grid(row=2, column=1, padx=10, pady=10)
 
+
 # Botão para gerar o QR Code
-botao_gerar = tk.Button(root, text="Gerar QR Code", command=gerar_qr_code)
+botao_gerar = tk.Button(root, text="Gerar QR Code", command=gerar_qr_code, bg='blue', fg='white')
 botao_gerar.grid(row=3, columnspan=2, pady=20)
 
 # Iniciar o loop principal
