@@ -19,4 +19,11 @@ video {
     font-size: 18px;
     margin-top: 20px;
     color: #333;
+    text-align: left;
+    display: inline-block;
+}
+
+#output h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
 }

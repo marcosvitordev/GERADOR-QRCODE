@@ -12,7 +12,16 @@
         <video id="video" width="300" height="300" autoplay></video>
         <canvas id="canvas" hidden></canvas>
     </div>
-    <p id="output">QR Code: <span id="qrcodeData"></span></p>
+    <div id="output">
+        <h2>Informações Decodificadas do QR Code:</h2>
+        <p><strong>Código de Identificação:</strong> <span id="codigoIdentificacao"></span></p>
+        <p><strong>Escola:</strong> <span id="escola"></span></p>
+        <p><strong>Nome do Aluno:</strong> <span id="nomeAluno"></span></p>
+        <p><strong>Professor:</strong> <span id="professor"></span></p>
+        <p><strong>Coordenador:</strong> <span id="coordenador"></span></p>
+        <p><strong>Data de Início:</strong> <span id="dataInicio"></span></p>
+        <p><strong>Data de Fim:</strong> <span id="dataFim"></span></p>
+    </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
     <script src="script.js"></script>
