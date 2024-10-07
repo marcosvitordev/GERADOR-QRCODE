@@ -4,17 +4,6 @@ $(document).ready(function() {
     const outputData = document.getElementById("qrcodeData");
     const ctx = canvas.getContext("2d");
 
-    let alunosData = [];
-
-    // Função para carregar o arquivo alunos.json
-    function loadAlunosData() {
-        $.getJSON("alunos.json", function(data) {
-            alunosData = data.alunos;
-        }).fail(function() {
-            outputData.innerText = "Erro ao carregar os dados dos alunos.";
-        });
-    }
-
     // Função para iniciar o acesso à câmera
     function startVideo() {
         navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
@@ -41,8 +30,7 @@ $(document).ready(function() {
                     const codigoIdentificacao = jsonData.codigo_identificacao; // Extrai o valor do campo "codigo_identificacao"
 
                     if (codigoIdentificacao) {
-                        // Chama a função para verificar o código no arquivo alunos.json
-                        verificarCodigo(codigoIdentificacao);
+                        outputData.innerText = `Código de Identificação: ${codigoIdentificacao}`;
                     } else {
                         outputData.innerText = "Código de Identificação não encontrado.";
                     }
@@ -55,25 +43,5 @@ $(document).ready(function() {
         requestAnimationFrame(scanQRCode); // Continua escaneando
     }
 
-    // Função para verificar o código de identificação no arquivo alunos.json
-    function verificarCodigo(codigo) {
-        const alunoEncontrado = alunosData.find(aluno => aluno.codigo_identificacao === codigo);
-
-        if (alunoEncontrado) {
-            // Exibe as informações do aluno
-            outputData.innerHTML = `
-                <strong>ESCOLA:</strong> ${alunoEncontrado.escola} <br>
-                <strong>Nome do Aluno:</strong> ${alunoEncontrado.nome_aluno} <br>
-                <strong>PROFESSOR:</strong> ${alunoEncontrado.professor} <br>
-                <strong>COORDENADOR:</strong> ${alunoEncontrado.coordenador} <br>
-                <strong>Data de Início:</strong> ${alunoEncontrado.data_inicio} <br>
-                <strong>Data de Fim:</strong> ${alunoEncontrado.data_fim}
-            `;
-        } else {
-            outputData.innerText = "Código de Identificação não encontrado no arquivo alunos.json.";
-        }
-    }
-
-    loadAlunosData(); // Carrega os dados dos alunos
     startVideo(); // Inicia o vídeo e a leitura do QR Code
 });
