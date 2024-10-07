@@ -25,19 +25,8 @@ $(document).ready(function() {
             const code = jsQR(imageData.data, imageData.width, imageData.height);
 
             if (code) {
-                try {
-                    const jsonData = JSON.parse(code.data); // Converte o conteúdo do QR Code para JSON
-                    const codigoIdentificacao = jsonData.codigo_identificacao; // Extrai o valor do campo "codigo_identificacao"
-
-                    if (codigoIdentificacao) {
-                        outputData.innerText = `Código de Identificação: ${codigoIdentificacao}`;
-                    } else {
-                        outputData.innerText = "Código de Identificação não encontrado.";
-                    }
-                } catch (e) {
-                    outputData.innerText = "Erro ao ler o QR Code.";
-                    console.error("Erro ao tentar interpretar o JSON:", e);
-                }
+                outputData.innerText = code.data; // Exibe o conteúdo do QR Code
+                console.log("QR Code data:", code.data);
             }
         }
         requestAnimationFrame(scanQRCode); // Continua escaneando
