@@ -1,59 +1,20 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leitor de QR Code</title>
-    <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
-    <style>
-        #qr-reader {
-            width: 300px;
-            margin: auto;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <h1>Verificador de QR Code</h1>
-    <div id="qr-reader"></div>
-    <div id="qr-result">Resultado: Nenhum QR Code lido</div>
-
-    <script>
-        function onScanSuccess(decodedText, decodedResult) {
-            // Sucesso ao ler o QR Code, exibe os dados do JSON
-            console.log(`Código QR detectado: ${decodedText}`);
-            document.getElementById("qr-result").innerHTML = `Resultado: ${decodedText}`;
-
-            // Aqui assumimos que o QR Code contém um link para um JSON ou string JSON
-            try {
-                let jsonData = JSON.parse(decodedText); // Se for um JSON embutido
-                // Exibindo os dados do JSON
-                document.getElementById("qr-result").innerHTML += `<pre>${JSON.stringify(jsonData, null, 2)}</pre>`;
-            } catch (e) {
-                console.error("Erro ao processar o JSON:", e);
-            }
-        }
-
-        function onScanFailure(error) {
-            // Caso falhe na leitura do QR Code, apenas loga o erro
-            console.warn(`Erro ao ler o código: ${error}`);
-        }
-
-        // Inicializando o scanner de QR Code
-        let html5QrCode = new Html5Qrcode("qr-reader");
-        html5QrCode.start(
-            { facingMode: "environment" },  // Usando a câmera traseira
-            {
-                fps: 10,    // Taxa de quadros
-                qrbox: { width: 250, height: 250 }  // Tamanho da caixa de detecção
-            },
-            onScanSuccess,
-            onScanFailure
-        ).catch(err => {
-            console.error("Erro ao iniciar a câmera:", err);
-        });
-    </script>
-
+    <h1>Leitor de QR Code</h1>
+    <div id="videoContainer">
+        <video id="video" width="300" height="300" autoplay></video>
+        <canvas id="canvas" hidden></canvas>
+    </div>
+    <p id="output">QR Code: <span id="qrcodeData"></span></p>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
