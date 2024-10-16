@@ -1,5 +1,8 @@
 body {
-    background-color: #ffffff;
+    background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+    background-repeat: no-repeat;
+    background-size: 1000px;
+    height: 900px;
 }
 #output{
     /* background-color: rgba(0, 0, 0, 0.678); */
@@ -43,7 +46,7 @@ video {
     background-color: rgba(68, 49, 49, 0.356);
 }
 .input-cd::placeholder{
-    color: #ffffff28;
+    color: #ffffff94;
     text-align: center;
 }
 /* #tela-info{
