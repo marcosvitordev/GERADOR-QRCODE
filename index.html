@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="container my-5">
+        <div class="text-center">
+            <img src="assets/logo.png" alt="">
+        </div>
         <h1 class="text-center mb-4">Leitor de QR Code</h1>
 
         <div class="row justify-content-center">
@@ -19,48 +24,76 @@
                 </div>
                 <canvas id="canvas" hidden></canvas>
             </div>
-        </div>
-
-        <div class="row justify-content-center mt-4">
-            <div class="col-md-8">
-                <div id="output" class="bg-light p-4 rounded shadow">
-                    <h2 class="mb-3 text-center">Informações do Certificado</h2>
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td><strong>Código de Identificação:</strong></td>
-                                <td id="codigoIdentificacao" class="contedoQr"></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Escola:</strong></td>
-                                <td id="escola" class="contedoQr"></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Nome do Aluno:</strong></td>
-                                <td id="nomeAluno" class="contedoQr"></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Professor:</strong></td>
-                                <td id="professor" class="contedoQr"></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Coordenador:</strong></td>
-                                <td id="coordenador" class="contedoQr"></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Data de Início:</strong></td>
-                                <td id="dataInicio" class="contedoQr"></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Data de Fim:</strong></td>
-                                <td id="dataFim" class="contedoQr"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
+            <div class="col-md-6 text-center">
+                <p>Ou digite o codigo de Identificação</p>
+                <input type="text" class="input-cd" placeholder="Digite o Código aqui">
             </div>
         </div>
+
+        <!-- Button trigger modal -->
+        <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Launch demo modal
+        </button> -->
+
+        <!-- Modal -->
+        <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">DADOS DO CERTIFICADO</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row justify-content-center mt-4 " id="tela-info">
+                            <div class="col-md-8">
+                                <div id="output" class="cor p-4 rounded shadow">
+                                    <h2 class="mb-3 text-center">Informações do Certificado</h2>
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>Código de Identificação:</strong></td>
+                                                <td id="codigoIdentificacao" class="contedoQr"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Escola:</strong></td>
+                                                <td id="escola" class="contedoQr"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Nome do Aluno:</strong></td>
+                                                <td id="nomeAluno" class="contedoQr"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Professor:</strong></td>
+                                                <td id="professor" class="contedoQr"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Coordenador:</strong></td>
+                                                <td id="coordenador" class="contedoQr"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Data de Início:</strong></td>
+                                                <td id="dataInicio" class="contedoQr"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Data de Fim:</strong></td>
+                                                <td id="dataFim" class="contedoQr"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Escanear
+                            novamente</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- Bootstrap JS and dependencies -->
@@ -70,4 +103,5 @@
     <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
